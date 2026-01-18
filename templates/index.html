@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>THEROSHANCODEX07</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        :root {
+            --primary: #ff2a2a;
+            --dark: #0f0f1b;
+            --darker: #1c1c2e;
+            --light: #ffffff;
+            --gray: #cccccc;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark), #0a0a12);
+            color: var(--light);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(255, 42, 42, 0.6);
+            margin-bottom: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        .social-links img {
+            width: 40px;
+            height: 40px;
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .social-links img:hover {
+            transform: scale(1.2) rotate(10deg);
+            filter: drop-shadow(0 0 10px var(--primary));
+        }
+
+        .input-section {
+            background: var(--darker);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            margin-bottom: 30px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .team-code-section,
+        .uid-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: 500;
+            color: var(--gray);
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #111;
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+            min-width: 200px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 42, 42, 0.4);
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        #search-emote {
+            width: 100%;
+            padding: 14px;
+            font-size: 1.1rem;
+            border-radius: 10px;
+            border: 2px solid #333;
+            background: #111;
+            color: white;
+        }
+
+        #search-emote:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(255, 42, 42, 0.5);
+        }
+
+        .emote-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .emote-item {
+            background: var(--darker);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            animation: popIn 0.5s ease-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .emote-item.visible {
+            opacity: 1;
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .emote-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(255, 42, 42, 0.3);
+        }
+
+        .emote-item img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .emote-details {
+            padding: 12px;
+        }
+
+        .emote-name {
+            font-weight: 600;
+            color: var(--light);
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .emote-id {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        .send-button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .send-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .send-button:hover::before {
+            left: 100%;
+        }
+
+        .send-button:hover {
+            background: #ff4444;
+            transform: scale(1.05);
+        }
+
+        .send-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-display {
+            margin-top: 30px;
+            background: var(--darker);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .result-display h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        #result-box {
+            background: #111;
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #ff4444;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .input-section { padding: 15px; }
+            .emote-list { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1></h1>
+            <div class="social-links">
+                <a href="https://t.me/Theroshancodex" target="_blank">
+                    <img src="\static\images\D.png" alt="Discord">
+                </a>
+                <a href="https://www.youtube.com/@THEROSHANCODEX_07" target="_blank">
+                    <img src="\static\images\Y.png" alt="YouTube">
+                </a>
+            </div>
+        </header>
+
+        <div class="input-section">
+            <div class="team-code-section">
+                <label for="team-code"><i class="fas fa-users"></i> Team Code:</label>
+                <input type="text" id="team-code" placeholder="Enter team code">
+            </div>
+            <div class="uid-section">
+                <label for="uid1"><i class="fas fa-id-badge"></i> UID 1:</label>
+                <input type="text" class="uid-input" id="uid1" placeholder="Enter UID 1">
+                
+                <label for="uid2">UID 2:</label>
+                <input type="text" class="uid-input" id="uid2" placeholder="Enter UID 2 (optional)">
+                
+                <label for="uid3">UID 3:</label>
+                <input type="text" class="uid-input" id="uid3" placeholder="Enter UID 3 (optional)">
+                
+                <label for="uid4">UID 4:</label>
+                <input type="text" class="uid-input" id="uid4" placeholder="Enter UID 4 (optional)">
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="search-emote" placeholder="🔍 Search emotes by name or ID...">
+            </div>
+        </div>
+
+        <div class="emote-list" id="emoteList">
+            <!-- All emotes will be injected here via JS -->
+        </div>
+
+        <div class="result-display">
+            <h3>Result:</h3>
+            <pre id="result-box">Ready. Fill in the details and send an emote.</pre>
+            <button class="copy-btn" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+        </div>
+    </div>
+
+    <script>
+        // === All Emotes Data ===
+        const emotes = [
+            { id: "909000075", name: "Cobra Rising", img: "909000075.png" },
+            { id: "909000063", name: "Ak Max", img: "909000063.png" },
+            { id: "909035007", name: "Shotgun Max", img: "909035007.png" },
+            { id: "909000068", name: "Scar Max", img: "909000068.png" },
+            { id: "909000085", name: "XM8 Max", img: "909000085.png" },
+            { id: "909000081", name: "M10 Max", img: "909000081.png" },
+            { id: "909000090", name: "Famasa Max", img: "909000090.png" },
+            { id: "909000098", name: "UMP Max", img: "909000098.png" },
+            { id: "909040010", name: "New M40 Max", img: "909040010.png" },
+            { id: "909045001", name: "Parafal Max", img: "909045001.png" },
+            { id: "909042008", name: "WD Picker Max", img: "909042008.png" },
+            { id: "909049012", name: "Open Fire", img: "909049012.png" },
+            { id: "909042007", name: "\"100\" Gloo Sculpture", img: "909042007.png" },
+            { id: "909000002", name: "LOL", img: "909000002.png" },
+            { id: "909000003", name: "Provoke", img: "909000003.png" },
+            { id: "909000010", name: "Flowers of Love", img: "909000010.png" },
+            { id: "909000014", name: "FFWC Throne", img: "909000014.png" },
+            { id: "909000032", name: "Selfie", img: "909000032.png" },
+            { id: "909000034", name: "Pirate's Flag", img: "909000034.png" },
+            { id: "909000036", name: "Top DJ", img: "909000036.png" },
+            { id: "909000038", name: "Power of money", img: "909000038.png" },
+            { id: "909000039", name: "Eat my dust", img: "909000039.png" },
+            { id: "909000041", name: "Kongfu", img: "909000041.png" },
+            { id: "909000045", name: "I heart you", img: "909000045.png" },
+            { id: "909000046", name: "Tea Time", img: "909000046.png" },
+            { id: "909000052", name: "Doggie", img: "909000052.png" },
+            { id: "909000055", name: "I'm Rich!", img: "909000055.png" },
+            { id: "909000056", name: "Make It Rain", img: "909000056.png" },
+            { id: "909000057", name: "Dust Off", img: "909000057.png" },
+            { id: "909000058", name: "Captain Booyah", img: "909000058.png" },
+            { id: "909000060", name: "BOOYAH!", img: "909000060.png" },
+            { id: "909000061", name: "Bhangra", img: "909000061.png" },
+            { id: "909000062", name: "Piece of Cake", img: "909000062.png" },
+            { id: "909000064", name: "I'm Saitama!", img: "909000064.png" },
+            { id: "909000065", name: "The Victor", img: "909000065.png" },
+            { id: "909000066", name: "Sii!", img: "909000066.png" },
+            { id: "909000067", name: "Obliteration", img: "909000067.png" },
+            { id: "909000069", name: "Top Scorer", img: "909000069.png" },
+            { id: "909000070", name: "Triple Kicks", img: "909000070.png" },
+            { id: "909000071", name: "Cobra Dance", img: "909000071.png" },
+            { id: "909000072", name: "Predator Pulse", img: "909000072.png" },
+            { id: "909000073", name: "Ground Punch", img: "909000073.png" },
+            { id: "909000074", name: "The Biker", img: "909000074.png" },
+            { id: "909000076", name: "One-Finger Pushup", img: "909000076.png" },
+            { id: "909000077", name: "Stage Time", img: "909000077.png" },
+            { id: "909000078", name: "Booyah! Balloon", img: "909000078.png" },
+            { id: "909000079", name: "More Practice", img: "909000079.png" },
+            { id: "909000080", name: "FFWS 2021", img: "909000080.png" },
+            { id: "909000086", name: "Mythos Four", img: "909000086.png" },
+            { id: "909000087", name: "Champion Grab", img: "909000087.png" },
+            { id: "909000088", name: "Win and Chill", img: "909000088.png" },
+            { id: "909000089", name: "Hadouken", img: "909000089.png" },
+            { id: "909000091", name: "Big Smash", img: "909000091.png" },
+            { id: "909000093", name: "All In Control", img: "909000093.png" },
+            { id: "909000094", name: "Debugging", img: "909000094.png" },
+            { id: "909000095", name: "Waggor Wave", img: "909000095.png" },
+            { id: "909000096", name: "Crazy Guitar", img: "909000096.png" },
+            { id: "909000121", name: "Dribble King", img: "909000121.png" },
+            { id: "909000122", name: "Name Not Found", img: "909000122.png" },
+            { id: "909000123", name: "Mind it!", img: "909000123.png" },
+            { id: "909000124", name: "Golden Combo", img: "909000124.png" },
+            { id: "909000125", name: "Sick Moves", img: "909000125.png" },
+            { id: "909000128", name: "Ruler's Flag", img: "909000128.png" },
+            { id: "909000129", name: "Money Throw", img: "909000129.png" },
+            { id: "909000130", name: "Endless Bullets", img: "909000130.png" },
+            { id: "909000133", name: "Fire Slam", img: "909000133.png" },
+            { id: "909000134", name: "Heartbroken", img: "909000134.png" },
+            { id: "909000135", name: "Rock Paper Scissors", img: "909000135.png" },
+            { id: "909000136", name: "Shattered Reality", img: "909000136.png" },
+            { id: "909000137", name: "Halo of Music", img: "909000137.png" },
+            { id: "909000138", name: "Burnt BBQ", img: "909000138.png" },
+            { id: "909000139", name: "Switching Steps", img: "909000139.png" },
+            { id: "909000140", name: "Creed Slay", img: "909000140.png" },
+            { id: "909000141", name: "Leap of Fail", img: "909000141.png" },
+            { id: "909000142", name: "Name Not Found", img: "909000142.png" },
+            { id: "909000143", name: "Helicopter Shot", img: "909000143.png" },
+            { id: "909000144", name: "Kungfu Tigers", img: "909000144.png" },
+            { id: "909000145", name: "Possessed Warrior", img: "909000145.png" },
+            { id: "909033001", name: "Fireborn", img: "909033001.png" },
+            { id: "909033002", name: "Golden Feather", img: "909033002.png" },
+            { id: "909033004", name: "Drop Kick", img: "909033004.png" },
+            { id: "909033005", name: "Sit Down!", img: "909033005.png" },
+            { id: "909033006", name: "BOOYAH Sparks", img: "909033006.png" },
+            { id: "909033007", name: "The FFWS Dance", img: "909033007.png" },
+            { id: "909033008", name: "Easy Peasy", img: "909033008.png" },
+            { id: "909033009", name: "Winner Throw", img: "909033009.png" },
+            { id: "909033010", name: "Weight of Victory", img: "909033010.png" },
+            { id: "909034001", name: "Chronicle of the Sword", img: "909034001.png" },
+            { id: "909034002", name: "The Collapse", img: "909034002.png" },
+            { id: "909034003", name: "Flaming Groove", img: "909034003.png" },
+            { id: "909034004", name: "Energetic", img: "909034004.png" },
+            { id: "909034005", name: "Ridicule", img: "909034005.png" },
+            { id: "909034006", name: "Tease Waggor", img: "909034006.png" },
+            { id: "909034007", name: "Great Conductor", img: "909034007.png" },
+            { id: "909034008", name: "Fake Death", img: "909034008.png" },
+            { id: "909034009", name: "Twerk", img: "909034009.png" },
+            { id: "909034010", name: "BR-Ranked Heroic Emote", img: "909034010.png" },
+            { id: "909034011", name: "BR-Ranked Master Emote", img: "909034011.png" },
+            { id: "909034012", name: "CS-Ranked Heroic Emote", img: "909034012.png" },
+            { id: "909034013", name: "CS-Ranked Master Emote", img: "909034013.png" },
+            { id: "909034014", name: "Yes, I do", img: "909034014.png" },
+            { id: "909035001", name: "Free Money!", img: "909035001.png" },
+            { id: "909035005", name: "Victorious Eagle", img: "909035005.png" },
+            { id: "909035006", name: "Flying Saucer", img: "909035006.png" },
+            { id: "909035008", name: "Bobble Dance", img: "909035008.png" },
+            { id: "909035009", name: "Weight Training", img: "909035009.png" },
+            { id: "909035010", name: "Beautiful Love", img: "909035010.png" },
+            { id: "909035011", name: "Groove Moves", img: "909035011.png" },
+            { id: "909035012", name: "Howler's Rage", img: "909035012.png" },
+            { id: "909035013", name: "Louder Please", img: "909035013.png" },
+            { id: "909035014", name: "Ninja Stand", img: "909035014.png" },
+            { id: "909035015", name: "Creator In Action", img: "909035015.png" },
+            { id: "909036001", name: "Ghost Float", img: "909036001.png" },
+            { id: "909036002", name: "Shiba Surf", img: "909036002.png" },
+            { id: "909036003", name: "Waiter Walk", img: "909036003.png" },
+            { id: "909036004", name: "Graffiti Cameraman", img: "909036004.png" },
+            { id: "909036005", name: "Agile Boxer", img: "909036005.png" },
+            { id: "909036006", name: "Sunbathing", img: "909036006.png" },
+            { id: "909036008", name: "Skateboard Swag", img: "909036008.png" },
+            { id: "909036009", name: "Phantom Tamer", img: "909036009.png" },
+            { id: "909036010", name: "The Signal", img: "909036010.png" },
+            { id: "909036011", name: "Eternal Descent", img: "909036011.png" },
+            { id: "909036012", name: "Swaggy Dance", img: "909036012.png" },
+            { id: "909036014", name: "Admire", img: "909036014.png" },
+            { id: "909037001", name: "Reindeer Float", img: "909037001.png" },
+            { id: "909037002", name: "Bamboo Dance", img: "909037002.png" },
+            { id: "909037003", name: "Dance of Constellation", img: "909037003.png" },
+            { id: "909037004", name: "Trophy Grab", img: "909037004.png" },
+            { id: "909037005", name: "Starry Hands", img: "909037005.png" },
+            { id: "909037006", name: "Yum", img: "909037006.png" },
+            { id: "909037007", name: "Happy Dancing", img: "909037007.png" },
+            { id: "909037008", name: "Juggle", img: "909037008.png" },
+            { id: "909037009", name: "Neon Sign", img: "909037009.png" },
+            { id: "909037010", name: "Beast Tease", img: "909037010.png" },
+            { id: "909037011", name: "Drachen Tear", img: "909037011.png" },
+            { id: "909037012", name: "Clap Dance", img: "909037012.png" },
+            { id: "909038001", name: "The Influencer", img: "909038001.png" },
+            { id: "909038002", name: "Name Not Found", img: "909038002.png" },
+            { id: "909038003", name: "Techno Blast", img: "909038003.png" },
+            { id: "909038004", name: "Be My Valentine", img: "909038004.png" },
+            { id: "909038005", name: "Angry Walk", img: "909038005.png" },
+            { id: "909038006", name: "Make Some Noise", img: "909038006.png" },
+            { id: "909038008", name: "Croco Hooray", img: "909038008.png" },
+            { id: "909038009", name: "Scorpio Spin", img: "909038009.png" },
+            { id: "909038010", name: "Cinder Summon", img: "909038010.png" },
+            { id: "909038011", name: "Shall We Dance?", img: "909038011.png" },
+            { id: "909038012", name: "Achiever Flip", img: "909038012.png" },
+            { id: "909038013", name: "Spin Master", img: "909038013.png" },
+            { id: "909039001", name: "Festival Celebration", img: "909039001.png" },
+            { id: "909039002", name: "Artistic Musical Dance", img: "909039002.png" },
+            { id: "909039003", name: "Forward, Backward", img: "909039003.png" },
+            { id: "909039004", name: "Scorpion Friend", img: "909039004.png" },
+            { id: "909039005", name: "Aching Power", img: "909039005.png" },
+            { id: "909039006", name: "Earthly Force", img: "909039006.png" },
+            { id: "909039007", name: "Grenade Magic", img: "909039007.png" },
+            { id: "909039008", name: "Oh Yeah!", img: "909039008.png" },
+            { id: "909039009", name: "Grace On Wheels", img: "909039009.png" },
+            { id: "909039010", name: "Flex", img: "909039010.png" },
+            { id: "909039011", name: "Crimson Doom", img: "909039011.png" },
+            { id: "909039012", name: "Fire Beast Tamer", img: "909039012.png" },
+            { id: "909039013", name: "Crimson Tunes", img: "909039013.png" },
+            { id: "909039014", name: "Swaggy V-Steps", img: "909039014.png" },
+            { id: "909040001", name: "The Chromatic Finish", img: "909040001.png" },
+            { id: "909040002", name: "Smash the Feather", img: "909040002.png" },
+            { id: "909040003", name: "Sonorous Steps", img: "909040003.png" },
+            { id: "909040004", name: "Fishing for Wisdom", img: "909040004.png" },
+            { id: "909040005", name: "Chromatic Pop Dance", img: "909040005.png" },
+            { id: "909040006", name: "Chroma Twist Twist", img: "909040006.png" },
+            { id: "909040008", name: "Birth of Justice", img: "909040008.png" },
+            { id: "909040009", name: "Spider-Sense", img: "909040009.png" },
+            { id: "909040011", name: "Play With Thunderbolt", img: "909040011.png" },
+            { id: "909040012", name: "6th Anniversary Celebration", img: "909040012.png" },
+            { id: "909040013", name: "Wisdom Swing", img: "909040013.png" },
+            { id: "909040014", name: "Helicopter Shot", img: "909040014.png" },
+            { id: "909041001", name: "Thunder Breathing First Form: Thunder Flash", img: "909041001.png" },
+            { id: "909041002", name: "Water Breathing Sixth Form: Whirlpool", img: "909041002.png" },
+            { id: "909041003", name: "Beast Breathing Fifth Fang: Crazy Cutting", img: "909041003.png" },
+            { id: "909041004", name: "Flying Ink Sword", img: "909041004.png" },
+            { id: "909041005", name: "Diz My Popblaster", img: "909041005.png" },
+            { id: "909041006", name: "Dance Puppet, Dance!", img: "909041006.png" },
+            { id: "909041007", name: "High Knees", img: "909041007.png" },
+            { id: "909041008", name: "Bony Fumes", img: "909041008.png" },
+            { id: "909041009", name: "Feel the Electricity", img: "909041009.png" },
+            { id: "909041010", name: "Whac-A-Cotton", img: "909041010.png" },
+            { id: "909041011", name: "Honorable Mention Emote", img: "909041011.png" },
+            { id: "909041012", name: "BR-Ranked Grandmaster Emote", img: "909041012.png" },
+            { id: "909041013", name: "CS-Ranked Grandmaster Emote", img: "909041013.png" },
+            { id: "909041014", name: "Monster Clubbing", img: "909041014.png" },
+            { id: "909041015", name: "Basudara Dance", img: "909041015.png" },
+            { id: "909042001", name: "Stir-Fry Frostfire", img: "909042001.png" },
+            { id: "909042002", name: "Money Rain", img: "909042002.png" },
+            { id: "909042003", name: "Frostfire's Calling", img: "909042003.png" },
+            { id: "909042004", name: "Stomping Foot", img: "909042004.png" },
+            { id: "909042005", name: "This Way", img: "909042005.png" },
+            { id: "909042006", name: "Excellent Service", img: "909042006.png" },
+            { id: "909042009", name: "Celebration Schuss", img: "909042009.png" },
+            { id: "909042011", name: "Dawn Voyage Emote", img: "909042011.png" },
+            { id: "909042012", name: "Lamborghini Ride", img: "909042012.png" },
+            { id: "909042013", name: "Hello! Frostfire Style", img: "909042013.png" },
+            { id: "909042016", name: "Hand Grooves", img: "909042016.png" },
+            { id: "909042017", name: "Free Fire Toiletman", img: "909042017.png" },
+            { id: "909042018", name: "Kemusan", img: "909042018.png" },
+            { id: "909043001", name: "Ribbit Rider", img: "909043001.png" },
+            { id: "909043002", name: "Inner Self Mastery", img: "909043002.png" },
+            { id: "909043003", name: "Emperor's Treasure Machine", img: "909043003.png" },
+            { id: "909043004", name: "Why So Chaos?", img: "909043004.png" },
+            { id: "909043005", name: "Huge Feast", img: "909043005.png" },
+            { id: "909043006", name: "Color Burst", img: "909043006.png" },
+            { id: "909043007", name: "Dragon Swipe", img: "909043007.png" },
+            { id: "909043008", name: "Samba", img: "909043008.png" },
+            { id: "909043009", name: "Speed Summon", img: "909043009.png" },
+            { id: "909043010", name: "What a Match", img: "909043010.png" },
+            { id: "909043013", name: "What a Pair", img: "909043013.png" },
+            { id: "909044001", name: "Byte Mounting", img: "909044001.png" },
+            { id: "909044002", name: "The Unicyclist", img: "909044002.png" },
+            { id: "909044003", name: "Basket Rafting", img: "909044003.png" },
+            { id: "909044004", name: "Happy Lamb Shouldering", img: "909044004.png" },
+            { id: "909044005", name: "Paradox of Enlightenment", img: "909044005.png" },
+            { id: "909044006", name: "Harmonious Paradox", img: "909044006.png" },
+            { id: "909044007", name: "Raise Your Thumb!", img: "909044007.png" },
+            { id: "909044015", name: "The Final Paradox", img: "909044015.png" },
+            { id: "909044016", name: "Honk Up!", img: "909044016.png" },
+            { id: "909045002", name: "Spring Rocker", img: "909045002.png" },
+            { id: "909045003", name: "Giddy Up!", img: "909045003.png" },
+            { id: "909045004", name: "The Goosy Dance", img: "909045004.png" },
+            { id: "909045005", name: "Captain Victor", img: "909045005.png" },
+            { id: "909045010", name: "A Flower Salute", img: "909045010.png" },
+            { id: "909045011", name: "Little Foxy Run", img: "909045011.png" },
+            { id: "909045012", name: "Mr. Waggor's Seesaw", img: "909045012.png" },
+            { id: "909045015", name: "Floating Meditation", img: "909045015.png" },
+            { id: "909045016", name: "Naatu Naatu", img: "909045016.png" },
+            { id: "909045017", name: "Champion's Walk", img: "909045017.png" },
+            { id: "909046001", name: "Aura Boarder", img: "909046001.png" },
+            { id: "909046002", name: "Who's the Booyah Champ!", img: "909046002.png" },
+            { id: "909046003", name: "Controlled Combustion", img: "909046003.png" },
+            { id: "909046004", name: "Cheers to Victory!", img: "909046004.png" },
+            { id: "909046005", name: "Shoe Shining", img: "909046005.png" },
+            { id: "909046006", name: "Gunspinning", img: "909046006.png" },
+            { id: "909046007", name: "Crowd Pleaser", img: "909046007.png" },
+            { id: "909046008", name: "No Sweat", img: "909046008.png" },
+            { id: "909046009", name: "Magma Quake", img: "909046009.png" },
+            { id: "909046010", name: "Max Firepower", img: "909046010.png" },
+            { id: "909046011", name: "Can't Touch This", img: "909046011.png" },
+            { id: "909046012", name: "Firestarter", img: "909046012.png" },
+            { id: "909046013", name: "FFWS Flag Flair", img: "909046013.png" },
+            { id: "909046014", name: "Beat Drop", img: "909046014.png" },
+            { id: "909046015", name: "Isagi's Spatial Awareness", img: "909046015.png" },
+            { id: "909046016", name: "Nagi's Trapping", img: "909046016.png" },
+            { id: "909046017", name: "Soaring Up", img: "909046017.png" },
+            { id: "909047001", name: "I Won't Bow Down", img: "909047001.png" },
+            { id: "909047002", name: "Aurora Iridescence", img: "909047002.png" },
+            { id: "909047003", name: "Couch For Two", img: "909047003.png" },
+            { id: "909047004", name: "Flutter Dash", img: "909047004.png" },
+            { id: "909047005", name: "Slippery Throne", img: "909047005.png" },
+            { id: "909047006", name: "Acceptance Speech", img: "909047006.png" },
+            { id: "909047007", name: "Love Me, Love Me Not", img: "909047007.png" },
+            { id: "909047008", name: "Scissor Savvy", img: "909047008.png" },
+            { id: "909047009", name: "The Thinker", img: "909047009.png" },
+            { id: "909047012", name: "JKT48 No.1", img: "909047012.png" },
+            { id: "909047015", name: "Rasengan", img: "909047015.png" },
+            { id: "909047019", name: "Clone Jutsu", img: "909047019.png" },
+            { id: "909048001", name: "To the Rescue", img: "909048001.png" },
+            { id: "909048002", name: "Midnight Peruse", img: "909048002.png" },
+            { id: "909048003", name: "Guitar Groove", img: "909048003.png" },
+            { id: "909048004", name: "Keyboard Player", img: "909048004.png" },
+            { id: "909048005", name: "On Drums", img: "909048005.png" },
+            { id: "909048006", name: "Chac-Chac", img: "909048006.png" },
+            { id: "909048007", name: "Pillow Fight", img: "909048007.png" },
+            { id: "909048009", name: "Goofy Camel", img: "909048009.png" },
+            { id: "909048010", name: "Hit a Six!", img: "909048010.png" },
+            { id: "909048011", name: "Flag Summon", img: "909048011.png" },
+            { id: "909048014", name: "Slurp slurp!", img: "909048014.png" },
+            { id: "909048015", name: "Sketching", img: "909048015.png" },
+            { id: "909048016", name: "Half-Time Chilling", img: "909048016.png" },
+            { id: "909048017", name: "Throw-In", img: "909048017.png" },
+            { id: "909049001", name: "Nailoong Time!", img: "909049001.png" },
+            { id: "909049002", name: "Hand Raise", img: "909049002.png" },
+            { id: "909049003", name: "Kick It Up", img: "909049003.png" },
+            { id: "909049006", name: "Creation Days", img: "909049006.png" },
+            { id: "909049007", name: "Raining Coins", img: "909049007.png" },
+            { id: "909049008", name: "Clap Clap Hooray", img: "909049008.png" },
+            { id: "909049009", name: "Infinite Loops", img: "909049009.png" },
+            { id: "909049010", name: "P90 Surfer", img: "909049010.png" },
+            { id: "909049011", name: "Boxing Machine", img: "909049011.png" },
+            { id: "909049013", name: "Comic Barf", img: "909049013.png" },
+            { id: "909049016", name: "Spear Spin", img: "909049016.png" },
+            { id: "909049017", name: "Flag Wave", img: "909049017.png" },
+            { id: "909049018", name: "Disco Dazzle", img: "909049018.png" },
+            { id: "909050002", name: "Reanimation Jutsu", img: "909050002.png" },
+            { id: "909050003", name: "The Final Battle", img: "909050003.png" },
+            { id: "909050005", name: "Fire Style: Fireball Jutsu", img: "909050005.png" },
+            { id: "909050006", name: "Flying Raijin Jutsu", img: "909050006.png" },
+            { id: "909050008", name: "Hammer Slam", img: "909050008.png" },
+            { id: "909050009", name: "The Rings", img: "909050009.png" },
+            { id: "909050010", name: "Drum Twirl", img: "909050010.png" },
+            { id: "909050011", name: "Bunny Action", img: "909050011.png" },
+            { id: "909050012", name: "Broom Swoosh", img: "909050012.png" },
+            { id: "909050013", name: "Blade from Heart", img: "909050013.png" },
+            { id: "909050017", name: "Bunny Wiggle", img: "909050017.png" },
+            { id: "909050018", name: "Flaming Heart", img: "909050018.png" },
+            { id: "909050019", name: "Rain or Shine", img: "909050019.png" },
+            { id: "909050020", name: "Sholay", img: "909050020.png" },
+            { id: "909050021", name: "Peak Points", img: "909050021.png" },
+            { id: "909050027", name: "Boat Race Aura", img: "909050027.png" },
+            { id: "909050028", name: "Boat Race Rowing", img: "909050028.png" },
+            { id: "909051001", name: "Prismatic Flight", img: "909051001.png" },
+            { id: "909051002", name: "Name Not Found", img: "909051002.png" },
+            { id: "909051003", name: "Name Not Found", img: "909051003.png" },
+            { id: "909051004", name: "Shower Time", img: "909051004.png" },
+            { id: "909051010", name: "On Motorbike", img: "909051010.png" },
+            { id: "909051012", name: "Celestial Shot", img: "909051012.png" },
+            { id: "909051013", name: "Red Petals", img: "909051013.png" }
+        ];
+
+        // Render Emotes
+        const emoteList = document.getElementById('emoteList');
+        const searchInput = document.getElementById('search-emote');
+        const resultBox = document.getElementById('result-box');
+        const copyBtn = document.getElementById('copyBtn');
+
+        function renderEmotes(filter = '') {
+            emoteList.innerHTML = '';
+            const filtered = emotes.filter(e => 
+                e.name.toLowerCase().includes(filter.toLowerCase()) || 
+                e.id.includes(filter)
+            );
+
+            filtered.forEach((emote, index) => {
+                const div = document.createElement('div');
+                div.className = 'emote-item';
+                div.style.animationDelay = `${index * 0.05}s`;
+                div.innerHTML = `
+                    <img src="/static/images/${emote.img}" alt="${emote.name}">
+                    <div class="emote-details">
+                        <p class="emote-name">${emote.name}</p>
+                        <p class="emote-id">ID: ${emote.id}</p>
+                    </div>
+                    <button class="send-button" data-emote-id="${emote.id}">Send</button>
+                `;
+                emoteList.appendChild(div);
+            });
+
+            setTimeout(() => {
+                document.querySelectorAll('.emote-item').forEach(el => el.classList.add('visible'));
+            }, 50);
+        }
+
+        renderEmotes();
+
+        // Search
+        searchInput.addEventListener('input', (e) => {
+            renderEmotes(e.target.value);
+        });
+
+        // Send Logic
+        emoteList.addEventListener('click', function(e) {
+            if (e.target.classList.contains('send-button')) {
+                const btn = e.target;
+                const emoteId = btn.getAttribute('data-emote-id');
+                const teamCode = document.getElementById('team-code').value.trim();
+                const uidInputs = document.querySelectorAll('.uid-input');
+                const uids = Array.from(uidInputs).map(i => i.value.trim()).filter(Boolean);
+
+                if (!teamCode) return resultBox.textContent = 'Error: Enter Team Code!';
+                if (uids.length === 0) return resultBox.textContent = 'Error: Enter at least one UID!';
+
+                resultBox.textContent = 'Sending...';
+                btn.disabled = true;
+
+                fetch('/send_emote', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ team_code: teamCode, emote_id: emoteId, uids })
+                })
+                .then(r => r.json())
+                .then(data => {
+                    resultBox.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(() => {
+                    resultBox.textContent = 'Error: Server not responding.';
+                })
+                .finally(() => {
+                    btn.disabled = false;
+                });
+            }
+        });
+
+        // Copy Result
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(resultBox.textContent);
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy', 2000);
+        });
+    </script>
+</body>
+              </html>
